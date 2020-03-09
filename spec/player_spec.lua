@@ -1,6 +1,6 @@
 describe('player', function()
   local Player = require 'player'
-  local player = Player
+  local player
 
   local function given_player_has_been_initialized_with(config)
     player = Player(config)
