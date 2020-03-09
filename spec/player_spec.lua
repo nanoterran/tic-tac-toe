@@ -36,7 +36,7 @@ describe('player', function()
       type = 'cross'
     })
 
-    player.increase_score()
+    player.set_score(1)
 
     assert.are.equal(1, player.get_score())
   end)

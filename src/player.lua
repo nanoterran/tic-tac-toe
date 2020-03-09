@@ -15,14 +15,14 @@ return function(config)
     return score
   end
 
-  local function increase_score()
-    score = score + 1
+  local function set_score(new_score)
+    score = new_score
   end
 
   return {
     get_name = get_name,
     get_type = get_type,
     get_score = get_score,
-    increase_score = increase_score
+    set_score = set_score
   }
 end
