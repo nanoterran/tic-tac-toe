@@ -15,10 +15,10 @@ describe('player', function()
   it('should allow the player to be initialized with a type', function()
     given_player_has_been_initialized_with({ 
       name = 'My_name',
-      type = 'cross'
+      type = 'nought'
     })
 
-    assert.are.equal('cross', player.get_type())
+    assert.are.equal('nought', player.get_type())
   end)
 
   it('player should have no score by default', function()
@@ -30,7 +30,7 @@ describe('player', function()
     assert.are.equal(0, player.get_score())
   end)
 
-  it('should allow to increment player score by one point', function()
+  it('should allow to set player score', function()
     given_player_has_been_initialized_with({ 
       name = 'My_name',
       type = 'cross'
