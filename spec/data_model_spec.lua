@@ -30,11 +30,19 @@ describe('data model', function()
 			key = 'a_key'
 		})
 
-		-- local 
-
 		assert.has_error(function() 
 			model.read('another_key')
-		end, 'Invalid key: another_key')
+		end, 'Cannot read from invalid key: another_key')
+	end)
+
+	it('should error when writing to an invalid key', function()
+		model = Model({
+			key = 'a_key'
+		})
+
+		assert.has_error(function() 
+			model.write('another_key')
+		end, 'Cannot write to invalid key: another_key')
 	end)
 
 end)
