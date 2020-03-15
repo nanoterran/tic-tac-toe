@@ -38,8 +38,4 @@ describe('board', function()
 
     assert.are.equal('cross', actual)
   end)
-
-  -- TODO: Test to do
-  -- should set a board cell
-
 end)
