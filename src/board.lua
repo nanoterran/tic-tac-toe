@@ -1,19 +1,19 @@
 return function(config)
-  local cells = {}
+  local board = {}
 
-  local function initialize_cells()
+  local function initialize_board()
     for i = 1, 10 do
-      cells[i] = ' '
+      board[i] = ' '
     end 
   end
 
-  local function get_cells()
-    return cells
+  local function get_board()
+    return board
   end
 
-  initialize_cells()
+  initialize_board()
 
   return {
-    get_cells = get_cells
+    get_board = get_board
   }
 end
