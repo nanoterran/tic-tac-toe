@@ -24,6 +24,20 @@ describe('board', function()
     board = Board(config)
   end
 
+  local function the_board_is_filled()
+    local filled_board = {
+      { 'X', 'O', 'O' },
+      { 'O', 'X', 'X' },
+      { 'X', 'O', '' }
+    }
+
+    for row = 1, 3 do
+      for column = 1, 3 do
+        board.set_cell(row, column, filled_board[row][column])
+      end
+    end
+  end
+
   it('should initialize a board with empty cells', function()
     given_the_board_is_initialized_with({ model = fake_model })
 
@@ -143,6 +157,23 @@ describe('board', function()
       .and_will_return({ row = 3, column = 3 }))
       .when(function()
         actual = board.has_winner()
+      end)
+
+    assert.are.equal(true, actual)
+  end)
+
+  it('should be able to check for a draw', function()
+    given_the_board_is_initialized_with({ model = fake_model })
+
+    the_board_is_filled()
+
+    local actual
+    fake_model.read.should_be_called_with('current_player')
+      .and_will_return('O')
+      .and_then(fake_model.read.should_be_called_with('input')
+      .and_will_return({ row = 3, column = 3 }))
+      .when(function()
+        actual = board.is_draw()
       end)
 
     assert.are.equal(true, actual)
