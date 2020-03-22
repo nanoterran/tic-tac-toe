@@ -12,11 +12,12 @@ install_dependencies() {
   sudo luarocks install luacov
 }
 
-echo -e "${GREEN}[+] Installing Dependencies${WHITE}"
-
 install_dependencies
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[+] Done Installing Dependencies${WHITE}"
 else
     echo -e "${RED}[-] Error Installing Dependencies${WHITE}"
 fi
+
+git submodule init
+git submodule update
