@@ -60,6 +60,21 @@ return function(config)
       has_diagonal_win_two(current_player, input)
   end
 
+  local function is_full()
+    for row = 1, 3 do
+      for column = 1, 3 do
+        if board[row][column] == ' ' then
+          return false
+        end
+      end
+    end
+    return true
+  end
+
+  local function is_draw()
+    return is_full() and not has_winner()
+  end
+
   model = config.model
   assert(model ~= nil, 'No Data Model provided')
 
@@ -70,6 +85,7 @@ return function(config)
     update = update,
     get_cell = get_cell,
     set_cell = set_cell,
-    has_winner = has_winner
+    has_winner = has_winner,
+    is_draw = is_draw
   }
 end
