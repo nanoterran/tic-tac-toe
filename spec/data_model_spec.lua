@@ -44,5 +44,4 @@ describe('data model', function()
 			model.write('another_key')
 		end, 'Cannot write to invalid key: another_key')
 	end)
-
 end)
