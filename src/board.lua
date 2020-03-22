@@ -8,7 +8,7 @@ return function(config)
       for column = 1, 3 do
         board[row][column] = ' '
       end
-    end 
+    end
   end
 
   local function get_board()
@@ -30,6 +30,36 @@ return function(config)
     set_cell(input.row, input.column, current_player)
   end
 
+  local function has_horizontal_win(player, input)
+    local row = input.row
+
+    return board[row][1] == player and board[row][2] == player and board[row][3] == player
+  end
+
+  local function has_vertical_win(player, input)
+    local column = input.column
+
+    return board[1][column] == player and board[2][column] == player and board[3][column] == player
+  end
+
+  local function has_diagonal_win(player, input)
+    return board[1][1] == player and board[2][2] == player and board[3][3] == player
+  end
+
+  local function has_diagonal_win_two(player, input)
+    return board[1][3] == player and board[2][2] == player and board[3][1] == player
+  end
+
+  local function has_winner()
+    local current_player = model.read('current_player')
+    local input = model.read('input')
+
+    return has_horizontal_win(current_player, input) or
+      has_vertical_win(current_player, input) or
+      has_diagonal_win(current_player, input) or
+      has_diagonal_win_two(current_player, input)
+  end
+
   model = config.model
   assert(model ~= nil, 'No Data Model provided')
 
@@ -39,6 +69,7 @@ return function(config)
     get_board = get_board,
     update = update,
     get_cell = get_cell,
-    set_cell = set_cell
+    set_cell = set_cell,
+    has_winner = has_winner
   }
 end

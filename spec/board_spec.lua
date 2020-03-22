@@ -71,4 +71,80 @@ describe('board', function()
 
       assert.are.equal('O', actual)
   end)
+
+  it('should be able to check for a winner on a row', function()
+    given_the_board_is_initialized_with({ model = fake_model })
+
+    board.set_cell(1, 1, 'X')
+    board.set_cell(1, 2, 'X')
+    board.set_cell(1, 3, 'X')
+
+    local actual
+    fake_model.read.should_be_called_with('current_player')
+      .and_will_return('X')
+      .and_then(fake_model.read.should_be_called_with('input')
+      .and_will_return({ row = 1, column = 3 }))
+      .when(function()
+        actual = board.has_winner()
+      end)
+
+    assert.are.equal(true, actual)
+  end)
+
+  it('should be able to check for a winner on a column', function()
+    given_the_board_is_initialized_with({ model = fake_model })
+
+    board.set_cell(1, 2, 'O')
+    board.set_cell(2, 2, 'O')
+    board.set_cell(3, 2, 'O')
+
+    local actual
+    fake_model.read.should_be_called_with('current_player')
+      .and_will_return('O')
+      .and_then(fake_model.read.should_be_called_with('input')
+      .and_will_return({ row = 3, column = 2 }))
+      .when(function()
+        actual = board.has_winner()
+      end)
+
+    assert.are.equal(true, actual)
+  end)
+
+  it('should be able to check for diagonal one win', function()
+    given_the_board_is_initialized_with({ model = fake_model })
+
+    board.set_cell(1, 1, 'O')
+    board.set_cell(2, 2, 'O')
+    board.set_cell(3, 3, 'O')
+
+    local actual
+    fake_model.read.should_be_called_with('current_player')
+      .and_will_return('O')
+      .and_then(fake_model.read.should_be_called_with('input')
+      .and_will_return({ row = 3, column = 3 }))
+      .when(function()
+        actual = board.has_winner()
+      end)
+
+    assert.are.equal(true, actual)
+  end)
+
+  it('should be able to check for diagonal two win', function()
+    given_the_board_is_initialized_with({ model = fake_model })
+
+    board.set_cell(1, 3, 'O')
+    board.set_cell(2, 2, 'O')
+    board.set_cell(3, 1, 'O')
+
+    local actual
+    fake_model.read.should_be_called_with('current_player')
+      .and_will_return('O')
+      .and_then(fake_model.read.should_be_called_with('input')
+      .and_will_return({ row = 3, column = 3 }))
+      .when(function()
+        actual = board.has_winner()
+      end)
+
+    assert.are.equal(true, actual)
+  end)
 end)
