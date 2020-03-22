@@ -28,7 +28,7 @@ describe('board', function()
     local filled_board = {
       { 'X', 'O', 'O' },
       { 'O', 'X', 'X' },
-      { 'X', 'O', '' }
+      { 'X', 'O', 'O' }
     }
 
     for row = 1, 3 do
