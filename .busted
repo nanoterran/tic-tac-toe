@@ -3,7 +3,8 @@ return {
     coverage = true
   },
   default = {
-    verbose = true
+    verbose = true,
+    lpath = "./src/?.lua;./src/?/?.lua;./src/?/init.lua;./libs/mach/src/?.lua;./libs/proxyquire/src/?.lua"
   },
   apiUnit = {
     tags = "Tic-Tac-Toe",
