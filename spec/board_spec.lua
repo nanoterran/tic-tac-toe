@@ -7,7 +7,7 @@ describe('board', function()
 		read = function() end,
 		write = function() end
   }
-  fake_model = mach.mock_table(fake_model_table, 'fake_model_table')
+  local fake_model = mach.mock_table(fake_model_table, 'fake_model_table')
 
   local function get_empty_board()
     local empty_board = {}
