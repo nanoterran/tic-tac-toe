@@ -6,12 +6,13 @@ return function(config)
 
 	local function update()
 		board.update()
+
 		local has_winner = board.has_winner()
 
+		local current_player = model.read('current_player')
 		if has_winner then
-			-- report winner
+			model.write('winner', current_player)
 		else
-			local current_player = model.read('current_player')
 			if current_player == 'X' then
 				current_player = 'O'
 			else

@@ -67,6 +67,23 @@ describe('controller', function()
 			.and_then(fake_model.write.should_be_called_with('current_player', 'O'))
 			.when(function()
 				controller.update()
-			end)	
+			end)
+	end)
+
+	it('should update model when there is a winner', function()
+		given_controller_has_been_initialized({
+			model = fake_model,
+			board = fake_board
+		})
+
+		fake_board.update.should_be_called()
+			.and_then(fake_board.has_winner.should_be_called()
+			.and_will_return(true))
+			.and_then(fake_model.read.should_be_called_with('current_player')
+			.and_will_return('X'))
+			.and_then(fake_model.write.should_be_called_with('winner', 'X'))
+			.when(function()
+				controller.update()
+			end)
 	end)
 end)
