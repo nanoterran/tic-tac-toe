@@ -13,12 +13,17 @@ return function(config)
 		if has_winner then
 			model.write('winner', current_player)
 		else
-			if current_player == 'X' then
-				current_player = 'O'
+			local is_draw = board.is_draw()
+			if is_draw then
+				model.write('winner', '-')
 			else
-				current_player = 'X'
+				if current_player == 'X' then
+					current_player = 'O'
+				else
+					current_player = 'X'
+				end
+				model.write('current_player', current_player)
 			end
-			model.write('current_player', current_player)
 		end
 	end
 

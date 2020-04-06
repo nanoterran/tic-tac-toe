@@ -10,6 +10,7 @@ describe('controller', function()
 	local fake_board_table = {
 		get_board = function() end,
 		has_winner = function() end,
+		is_draw = function() end,
     get_cell = function() end,
 		set_cell = function() end,
 		update = function() end
@@ -65,6 +66,7 @@ describe('controller', function()
 			.and_then(fake_model.read.should_be_called_with('current_player')
 			.and_will_return('X'))
 			.and_then(fake_model.write.should_be_called_with('current_player', 'O'))
+			.and_other_calls_should_be_ignored()
 			.when(function()
 				controller.update()
 			end)
@@ -82,6 +84,26 @@ describe('controller', function()
 			.and_then(fake_model.read.should_be_called_with('current_player')
 			.and_will_return('X'))
 			.and_then(fake_model.write.should_be_called_with('winner', 'X'))
+			.and_other_calls_should_be_ignored()
+			.when(function()
+				controller.update()
+			end)
+	end)
+
+	it('should be able to report a draw', function()
+		given_controller_has_been_initialized({
+			model = fake_model,
+			board = fake_board
+		})
+
+		fake_board.update.should_be_called()
+			.and_then(fake_board.has_winner.should_be_called()
+			.and_will_return(false))
+			.and_then(fake_model.read.should_be_called_with('current_player')
+			.and_will_return('X'))
+			.and_then(fake_board.is_draw.should_be_called()
+			.and_will_return(true))
+			.and_then(fake_model.write.should_be_called_with('winner', '-'))
 			.when(function()
 				controller.update()
 			end)
