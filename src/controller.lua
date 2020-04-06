@@ -12,10 +12,12 @@ return function(config)
 		local current_player = model.read('current_player')
 		if has_winner then
 			model.write('winner', current_player)
+			model.write('game_state', 'stop')
 		else
 			local is_draw = board.is_draw()
 			if is_draw then
 				model.write('winner', '-')
+				model.write('game_state', 'stop')
 			else
 				if current_player == 'X' then
 					current_player = 'O'
