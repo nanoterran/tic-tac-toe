@@ -12,7 +12,6 @@ local player_two = Player({
 	type = 'O'
 })
 
-
 local input = {}
 
 local model = Model({
