@@ -12,8 +12,10 @@ jobs:
   label:
 
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/labeler@v2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Upload a Release Asset
+        uses: actions/upload-release-asset@v1.0.2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+    
